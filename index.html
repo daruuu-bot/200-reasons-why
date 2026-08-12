@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>200 Reasons Why I Love You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-deep: #0d0a2b;
+    --night: #1a1440;
+    --indigo: #2d2359;
+    --plum: #4a2f6e;
+    --candle: #ffb84d;
+    --candle-hot: #fff2c9;
+    --gold: #e8c17d;
+    --lavender: #c9b6e4;
+    --cream: #faf3e6;
+    --cream-dim: #d9cfe8;
+    --shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 15%, rgba(74,47,110,0.55), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 75%, rgba(45,35,89,0.6), transparent 60%),
+      linear-gradient(180deg, var(--night-deep) 0%, var(--night) 55%, var(--indigo) 100%);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--cream);
+    overflow-x: hidden;
+    background-attachment: fixed;
+  }
+
+  #stars {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: var(--cream);
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  .shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cream), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    animation: shoot 4.5s ease-in infinite;
+  }
+  @keyframes shoot {
+    0% { opacity: 0; transform: translate(0,0) rotate(-35deg) scaleX(1); }
+    3% { opacity: 1; }
+    18% { opacity: 0; transform: translate(-260px, 190px) rotate(-35deg) scaleX(45); }
+    100% { opacity: 0; }
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -10%;
+    font-size: 16px;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    color: var(--lavender);
+    filter: drop-shadow(0 0 6px rgba(201,182,228,0.5));
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    12% { opacity: 0.5; }
+    50% { transform: translateY(-55vh) translateX(15px) rotate(15deg); }
+    88% { opacity: 0.3; }
+    100% { transform: translateY(-105vh) translateX(-15px) rotate(-10deg); opacity: 0; }
+  }
+
+  .candle-wrap {
+    position: relative;
+    width: 56px;
+    height: 118px;
+    margin: 0 auto 6px;
+  }
+  .candle-glow {
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    width: 160px;
+    height: 160px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,184,77,0.55) 0%, rgba(255,184,77,0.18) 40%, transparent 70%);
+    animation: glowPulse 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.75; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+  .candle-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 62px;
+    background: linear-gradient(180deg, #fffaf0, #f4e4c9);
+    border-radius: 4px 4px 2px 2px;
+    box-shadow: inset -4px 0 8px rgba(0,0,0,0.08), 0 6px 14px rgba(0,0,0,0.35);
+  }
+  .candle-wick {
+    position: absolute;
+    bottom: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background: #4a3826;
+  }
+  .candle-flame {
+    position: absolute;
+    bottom: 68px;
+    left: 50%;
+    width: 14px;
+    height: 26px;
+    transform-origin: bottom center;
+    background: radial-gradient(circle at 50% 70%, var(--candle-hot) 0%, var(--candle) 45%, rgba(255,140,40,0.1) 80%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    animation: flicker 2.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(255,184,77,0.8));
+  }
+  @keyframes flicker {
+    0%, 100% { transform: translateX(-50%) rotate(-2deg) scaleY(1); }
+    20% { transform: translateX(-50%) rotate(2deg) scaleY(0.96); }
+    40% { transform: translateX(-50%) rotate(-3deg) scaleY(1.05); }
+    60% { transform: translateX(-50%) rotate(1deg) scaleY(0.98); }
+    80% { transform: translateX(-50%) rotate(-1deg) scaleY(1.03); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .candle-flame, .candle-glow, .star, .heart, .shooting-star { animation: none !important; }
+  }
+
+  #lockScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 20px;
+    transition: opacity 0.9s ease, visibility 0.9s ease, transform 0.9s ease;
+  }
+  #lockScreen.hidden {
+    opacity: 0;
+    transform: scale(1.05);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .lock-card {
+    background: rgba(26, 20, 64, 0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(232, 193, 125, 0.25);
+    border-radius: 28px;
+    padding: 40px 38px 34px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: riseIn 0.9s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .lock-card h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.3rem;
+    margin: 6px 0 2px;
+    color: var(--gold);
+  }
+  .lock-card p.sub {
+    margin: 0 0 26px;
+    font-size: 0.92rem;
+    color: var(--cream-dim);
+  }
+
+  #pwInput {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 2px solid rgba(232,193,125,0.35);
+    background: rgba(13,10,43,0.55);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-align: center;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  #pwInput::placeholder { color: rgba(250,243,230,0.35); }
+  #pwInput:focus {
+    border-color: var(--candle);
+    box-shadow: 0 0 0 4px rgba(255,184,77,0.18);
+  }
+
+  #unlockBtn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--candle), #d98f2b);
+    color: #2a1a05;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255,184,77,0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  #unlockBtn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,184,77,0.5); }
+  #unlockBtn:active { transform: translateY(0); }
+
+  #pwError {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #ff9f9f;
+    min-height: 18px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  #pwError.show { opacity: 1; }
+
+  .shake { animation: shake 0.45s; }
+  @keyframes shake {
+    10%, 90% { transform: translateX(-3px); }
+    20%, 80% { transform: translateX(5px); }
+    30%, 50%, 70% { transform: translateX(-8px); }
+    40%, 60% { transform: translateX(8px); }
+  }
+
+  #noteScreen {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 50px 22px 100px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1s ease 0.15s, transform 1s ease 0.15s;
+  }
+  #noteScreen.visible { opacity: 1; transform: translateY(0); }
+
+  .note-header {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+  .note-header .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.72rem;
+    color: var(--lavender);
+    font-weight: 600;
+  }
+  .note-header h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 3.4rem;
+    background: linear-gradient(135deg, var(--gold), var(--candle));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 6px 0 8px;
+    line-height: 1.05;
+    filter: drop-shadow(0 0 18px rgba(255,184,77,0.25));
+  }
+  .note-header p {
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .save-pill {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: rgba(26,20,64,0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(232,193,125,0.3);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 20;
+  }
+  .save-pill.show { opacity: 1; }
+
+  .reasons-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .reason-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 12px 10px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+  }
+  .reason-row:hover { background: rgba(232,193,125,0.06); }
+
+  .reason-num {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--lavender);
+    min-width: 34px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .reason-text {
+    flex: 1;
+    min-height: 1.6em;
+    border-bottom: 2px dashed rgba(232,193,125,0.3);
+    padding: 2px 4px 6px;
+    font-size: 1.02rem;
+    color: var(--cream);
+    outline: none;
+    line-height: 1.5;
+  }
+  .reason-text:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(217,207,232,0.4);
+    font-style: italic;
+  }
+  .reason-text:focus {
+    border-bottom-color: var(--candle);
+  }
+
+  .note-footer {
+    text-align: center;
+    margin-top: 56px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+  }
+
+  ::selection { background: rgba(255,184,77,0.35); }
+
+  @media (max-width: 480px) {
+    .note-header h1 { font-size: 2.6rem; }
+    .reason-num { min-width: 26px; font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<div id="lockScreen">
+  <div class="lock-card" id="lockCard">
+    <div class="candle-wrap">
+      <div class="candle-glow"></div>
+      <div class="candle-flame"></div>
+      <div class="candle-wick"></div>
+      <div class="candle-body"></div>
+    </div>
+    <h1>A little something for you</h1>
+    <p class="sub">Enter the secret code to unlock it</p>
+    <input id="pwInput" type="password" inputmode="numeric" maxlength="12" placeholder="• • • • • •" autocomplete="off">
+    <button id="unlockBtn">Unlock ✨</button>
+    <div id="pwError">That's not quite it — try again 💭</div>
+  </div>
+</div>
+
+<div id="noteScreen">
+  <div class="note-header">
+    <div class="candle-wrap" style="transform: scale(0.75); margin-bottom: -14px;">
+      <div class="candle-glow"></div>
+      <div class="candle-flame"></div>
+      <div class="candle-wick"></div>
+      <div class="candle-body"></div>
+    </div>
+    <div class="eyebrow">for you, always</div>
+    <h1>200 Reasons Why<br>I Love You</h1>
+    <p>Every reason is real, even the silly ones. Tap a line to write.</p>
+  </div>
+
+  <div class="save-pill" id="savePill">saved ✓</div>
+
+  <div class="reasons-list" id="reasonsList"></div>
+
+  <div class="note-footer">…and 200 more tomorrow. 💕</div>
+</div>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  const STAR_COUNT = 130;
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.2 + 0.6;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDuration = (2 + Math.random() * 3.5) + 's';
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    starsContainer.appendChild(s);
+  }
+  function spawnShootingStar() {
+    const sh = document.createElement('div');
+    sh.className = 'shooting-star';
+    sh.style.left = (10 + Math.random() * 60) + 'vw';
+    sh.style.top = (Math.random() * 35) + 'vh';
+    starsContainer.appendChild(sh);
+    setTimeout(() => sh.remove(), 4600);
+  }
+  setInterval(spawnShootingStar, 5000);
+  spawnShootingStar();
+
+  const heartEmojis = ['💕','💗','✧','·','♡'];
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.fontSize = (12 + Math.random()*14) + 'px';
+    const duration = 10 + Math.random()*8;
+    h.style.animationDuration = duration + 's';
+    starsContainer.appendChild(h);
+    setTimeout(() => h.remove(), duration*1000 + 200);
+  }
+  for (let i=0;i<5;i++) setTimeout(spawnHeart, i*900);
+  setInterval(spawnHeart, 2200);
+
+  const PASSWORD = "020426";
+  const lockScreen = document.getElementById('lockScreen');
+  const lockCard = document.getElementById('lockCard');
+  const pwInput = document.getElementById('pwInput');
+  const unlockBtn = document.getElementById('unlockBtn');
+  const pwError = document.getElementById('pwError');
+  const noteScreen = document.getElementById('noteScreen');
+
+  function tryUnlock() {
+    if (pwInput.value.trim() === PASSWORD) {
+      lockScreen.classList.add('hidden');
+      document.body.style.overflowY = 'auto';
+      setTimeout(() => noteScreen.classList.add('visible'), 200);
+    } else {
+      pwError.classList.add('show');
+      lockCard.classList.remove('shake');
+      void lockCard.offsetWidth;
+      lockCard.classList.add('shake');
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+  unlockBtn.addEventListener('click', tryUnlock);
+  pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+  window.addEventListener('load', () => pwInput.focus());
+
+  const list = document.getElementById('reasonsList');
+  const TOTAL = 200;
+  const savePill = document.getElementById('savePill');
+  let saveTimer = null;
+  let savedReasons = {};
+
+  function buildList() {
+    const frag = document.createDocumentFragment();
+    for (let i = 1; i <= TOTAL; i++) {
+      const row = document.createElement('div');
+      row.className = 'reason-row';
+
+      const num = document.createElement('div');
+      num.className = 'reason-num';
+      num.textContent = i + '.';
+
+      const text = document.createElement('div');
+      text.className = 'reason-text';
+      text.contentEditable = 'true';
+      text.dataset.placeholder = 'write your reason here…';
+      text.dataset.index = i;
+      if (savedReasons[i]) text.textContent = savedReasons[i];
+
+      text.addEventListener('input', () => {
+        savedReasons[i] = text.textContent;
+        scheduleSave();
+      });
+
+      row.appendChild(num);
+      row.appendChild(text);
+      frag.appendChild(row);
+    }
+    list.appendChild(frag);
+  }
+
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveReasons, 700);
+  }
+
+  async function saveReasons() {
+    try {
+      await window.storage.set('love-reasons', JSON.stringify(savedReasons), false);
+      savePill.classList.add('show');
+      setTimeout(() => savePill.classList.remove('show'), 1400);
+    } catch (err) {
+      console.error('Could not save:', err);
+    }
+  }
+
+  async function loadReasons() {
+    try {
+      const result = await window.storage.get('love-reasons', false);
+      if (result && result.value) {
+        savedReasons = JSON.parse(result.value);
+      }
+    } catch (err) {
+      savedReasons = {};
+    }
+    buildList();
+  }
+
+  loadReasons();
+</script>
+
+</body>
+</html>
