@@ -346,16 +346,12 @@
     padding: 2px 4px 6px;
     font-size: 1.02rem;
     color: var(--cream);
-    outline: none;
     line-height: 1.5;
   }
-  .reason-text:empty::before {
-    content: attr(data-placeholder);
+  .reason-text.reason-empty::before {
+    content: "still to come…";
     color: rgba(217,207,232,0.4);
     font-style: italic;
-  }
-  .reason-text:focus {
-    border-bottom-color: var(--candle);
   }
 
   .note-footer {
@@ -406,8 +402,6 @@
     <h1>200 Reasons Why<br>I Love You</h1>
     <p>Every reason is real, even the silly ones. Tap a line to write.</p>
   </div>
-
-  <div class="save-pill" id="savePill">saved ✓</div>
 
   <div class="reasons-list" id="reasonsList"></div>
 
@@ -481,11 +475,20 @@
   pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
   window.addEventListener('load', () => pwInput.focus());
 
+  // ---------------------------------------------------------------
+  // ✏️  PUT YOUR REASONS HERE.
+  // Just fill in the quotes below, in order, 1 through 200.
+  // Leave any of them as "" (empty) and that line will just show
+  // a soft placeholder instead — so you can fill this in over time.
+  // ---------------------------------------------------------------
+  const REASONS = [
+    "The way you laugh at your own jokes before you finish telling them",
+    "You remember the little things I mention in passing",
+    // ... keep going! Add all 200 between the [ ] above, one per line.
+  ];
+
   const list = document.getElementById('reasonsList');
   const TOTAL = 200;
-  const savePill = document.getElementById('savePill');
-  let saveTimer = null;
-  let savedReasons = {};
 
   function buildList() {
     const frag = document.createDocumentFragment();
@@ -499,15 +502,13 @@
 
       const text = document.createElement('div');
       text.className = 'reason-text';
-      text.contentEditable = 'true';
-      text.dataset.placeholder = 'write your reason here…';
-      text.dataset.index = i;
-      if (savedReasons[i]) text.textContent = savedReasons[i];
-
-      text.addEventListener('input', () => {
-        savedReasons[i] = text.textContent;
-        scheduleSave();
-      });
+      const reason = REASONS[i - 1];
+      if (reason) {
+        text.textContent = reason;
+      } else {
+        text.classList.add('reason-empty');
+        text.textContent = '';
+      }
 
       row.appendChild(num);
       row.appendChild(text);
@@ -516,34 +517,7 @@
     list.appendChild(frag);
   }
 
-  function scheduleSave() {
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveReasons, 700);
-  }
-
-  async function saveReasons() {
-    try {
-      await window.storage.set('love-reasons', JSON.stringify(savedReasons), false);
-      savePill.classList.add('show');
-      setTimeout(() => savePill.classList.remove('show'), 1400);
-    } catch (err) {
-      console.error('Could not save:', err);
-    }
-  }
-
-  async function loadReasons() {
-    try {
-      const result = await window.storage.get('love-reasons', false);
-      if (result && result.value) {
-        savedReasons = JSON.parse(result.value);
-      }
-    } catch (err) {
-      savedReasons = {};
-    }
-    buildList();
-  }
-
-  loadReasons();
+  buildList();
 </script>
 
 </body>
